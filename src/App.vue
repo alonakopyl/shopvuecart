@@ -1,10 +1,21 @@
 <template>
   <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
+    <router-link class="router-link" :class="{active:$route.name==='home'}" to="/">Тапки</router-link> 
+    <router-link class="router-link" :class="{active:$route.name==='HatView'}" to="/hat">Шапки</router-link>
+    <router-link class="router-link" :class="{active:$route.name==='CartView'}" to="/cart">Корзина</router-link>
   </nav>
   <router-view/>
 </template>
+
+<script>
+
+export default{
+  mounted(){
+    this.$store.commit('updateFromLocalStorage')
+  }
+}
+
+</script>
 
 <style lang="less">
 #app {
@@ -22,9 +33,18 @@ nav {
     font-weight: bold;
     color: #2c3e50;
 
-    &.router-link-exact-active {
+    &.active {
       color: #42b983;
     }
   }
+}
+
+.router-link{
+  margin-right: 20px;
+}
+
+html, body{
+  margin: 0;
+  padding: 0;
 }
 </style>
